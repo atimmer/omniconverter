@@ -4,6 +4,7 @@ export type ConversionPageConfig = {
   description: string;
   biasModuleId?: string;
   exampleInput?: string;
+  alwaysPossibleModuleId?: string;
 };
 
 export const CONVERSION_PAGES: ConversionPageConfig[] = [
@@ -142,6 +143,13 @@ export const CONVERSION_PAGES: ConversionPageConfig[] = [
     title: "Decode JWT Tokens",
     description: "Inspect JWT headers and payloads without verifying signatures.",
     biasModuleId: "jwt",
+  },
+  {
+    slug: "base64-encode",
+    title: "Base64 Encoder",
+    description: "Encode any text into base64 and base64url instantly.",
+    alwaysPossibleModuleId: "base64-encode",
+    exampleInput: "Encode me to base64",
   },
   {
     slug: "base64-decode",

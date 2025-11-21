@@ -52,6 +52,12 @@ Modules live in `src/conversions/<domain>.ts` and are registered in `src/convers
   - A definition list built from `rows`, each with a copy button.
 - Fall back to the dashed placeholder when no module matches.
 
+### Always-On Converters
+- Some conversions are always possible on any input (e.g., base64 encode).
+- Defined via `AlwaysPossibleModule` with a `heuristicScore` for ordering; resolved through `resolveAlwaysPossible` in `src/conversions/alwaysPossible.ts`.
+- A separate “Always-on converters” section renders beneath the main results without altering the “no results” state.
+- Route configs can provide `alwaysPossibleModuleId` so the matching converter is promoted to the top of this section.
+
 ### Domain-Specific Visuals
 - Colors: `renderHighlight` shows the swatch box (reuse existing UI) and also pins rows for `RGB`, `RGBA`, `Hex` first.
 - Mass: No visual, just rows like `Kilograms`, `Pounds` with unit hints.

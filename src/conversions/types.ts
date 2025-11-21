@@ -34,3 +34,20 @@ export type ConversionResolution = {
 export type ResolverOptions = {
   biasModuleId?: string;
 };
+
+export type AlwaysPossibleModule = {
+  id: string;
+  label: string;
+  convert: (raw: string) => ConversionPayload | null;
+  heuristicScore?: (raw: string) => number;
+};
+
+export type AlwaysPossibleResolution = {
+  module: AlwaysPossibleModule;
+  payload: ConversionPayload;
+  score: number;
+};
+
+export type AlwaysPossibleResolverOptions = {
+  preferredModuleId?: string;
+};

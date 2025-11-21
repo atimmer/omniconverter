@@ -10,6 +10,7 @@ import type {
   ConversionResolution,
   ResolverOptions,
 } from "./types";
+export { alwaysPossibleModules, resolveAlwaysPossible } from "./alwaysPossible";
 
 /* Keep this list in alphabetical order */
 export const modules: ConversionModule[] = [

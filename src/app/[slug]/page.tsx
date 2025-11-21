@@ -47,6 +47,7 @@ export default async function ConversionPage({ params }: PageProps) {
 
         <OmniConverter
           biasModuleId={config.biasModuleId}
+          preferredAlwaysModuleId={config.alwaysPossibleModuleId}
           defaultValue={config.exampleInput}
         />
       </main>

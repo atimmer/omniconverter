@@ -2,12 +2,18 @@
 
 import { useEffect, useMemo, useRef, useState } from "react";
 import { SuggestionForm } from "./SuggestionForm";
-import { modules, resolveConversion } from "../conversions";
+import {
+  alwaysPossibleModules,
+  modules,
+  resolveAlwaysPossible,
+  resolveConversion,
+} from "../conversions";
 import type { OutputRow } from "../conversions/types";
 import { cn } from "../lib/utils";
 
 type OmniConverterProps = {
   biasModuleId?: string;
+  preferredAlwaysModuleId?: string;
   intro?: React.ReactNode;
   defaultValue?: string;
 };
@@ -65,6 +71,7 @@ const ResultRows = ({ rows }: { rows: OutputRow[] }) => (
 
 export default function OmniConverter({
   biasModuleId,
+  preferredAlwaysModuleId,
   intro,
   defaultValue,
 }: OmniConverterProps) {
@@ -80,6 +87,16 @@ export default function OmniConverter({
   const resolution = useMemo(
     () => resolveConversion(input, modules, { biasModuleId }),
     [input, biasModuleId],
+  );
+
+  const alwaysPreferredId = preferredAlwaysModuleId ?? biasModuleId;
+
+  const alwaysPossibleResolutions = useMemo(
+    () =>
+      resolveAlwaysPossible(input, alwaysPossibleModules, {
+        preferredModuleId: alwaysPreferredId,
+      }),
+    [input, alwaysPreferredId],
   );
 
   const hasHighlight = Boolean(resolution?.payload.highlight);
@@ -165,6 +182,46 @@ export default function OmniConverter({
           </div>
         )}
       </section>
+
+      {trimmedInput.length > 0 ? (
+        <section className="space-y-4 border-t border-slate-200 pt-8">
+          <div className="flex items-center gap-3">
+            <h2 className="text-sm font-semibold uppercase tracking-wider text-slate-500">
+              Always-on converters
+            </h2>
+            <span className="rounded-full bg-slate-200 px-2 py-1 text-[11px] font-semibold uppercase tracking-widest text-slate-600">
+              Works on any input
+            </span>
+          </div>
+
+          {alwaysPossibleResolutions.length > 0 ? (
+            <div className="space-y-4">
+              {alwaysPossibleResolutions.map((result) => (
+                <div
+                  key={result.module.id}
+                  className="space-y-4 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm"
+                >
+                  <div className="flex items-center justify-between gap-3">
+                    <div className="flex items-center gap-2">
+                      <span className="rounded-full bg-slate-100 px-2 py-1 text-xs font-semibold text-slate-700">
+                        {result.module.label}
+                      </span>
+                      <span className="text-xs text-slate-500">
+                        Always available
+                      </span>
+                    </div>
+                  </div>
+                  <ResultRows rows={result.payload.rows} />
+                </div>
+              ))}
+            </div>
+          ) : (
+            <div className="rounded-2xl border border-dashed border-slate-200 bg-white p-6 text-sm text-slate-500 shadow-sm">
+              These converters are ready for any text you enter.
+            </div>
+          )}
+        </section>
+      ) : null}
     </div>
   );
 }

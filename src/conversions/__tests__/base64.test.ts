@@ -1,5 +1,6 @@
 import { describe, expect, it } from "bun:test";
 import base64Module from "../base64";
+import base64EncodeModule from "../base64Encode";
 
 describe("base64 module", () => {
   it("decodes standard base64 text", () => {
@@ -35,5 +36,18 @@ describe("base64 module", () => {
   it("ignores non-base64 input", () => {
     expect(base64Module.detect("not base64")).toBeNull();
     expect(base64Module.detect("12345678")).toBeNull();
+  });
+
+  it("encodes any text to base64 and base64url", () => {
+    const input = "Encode me!";
+    const payload = base64EncodeModule.convert(input);
+    expect(payload).not.toBeNull();
+
+    const rows = payload?.rows ?? [];
+    const standard = rows.find((row) => row.label === "Base64 (standard)");
+    const urlSafe = rows.find((row) => row.label === "Base64 (URL-safe)");
+
+    expect(standard?.value).toBe("RW5jb2RlIG1lIQ==");
+    expect(urlSafe?.value).toBe("RW5jb2RlIG1lIQ");
   });
 });
