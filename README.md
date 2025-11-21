@@ -7,6 +7,7 @@ A small Next.js (App Router) tool that auto-detects inputs and converts them inl
 - Power (watts ↔ kilowatts ↔ horsepower ↔ megawatts).
 - Data size (bytes, KB, MB, GB, TB).
 - JWT decode (header + payload + signature, decode only).
+- Base64 decode (standard + base64url into UTF-8, with optional JSON pretty-print).
 
 SEO-friendly landing pages (e.g., `/rgb-to-hsl`, `/kg-to-lb`, `/jwt-decode`) are statically generated and reuse the omni-converter with a bias toward the named conversion plus intro copy.
 

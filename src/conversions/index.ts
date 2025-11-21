@@ -1,3 +1,4 @@
+import base64 from "./base64";
 import color from "./color";
 import dataSize from "./dataSize";
 import jwt from "./jwt";
@@ -12,6 +13,7 @@ import type {
 
 /* Keep this list in alphabetical order */
 export const modules: ConversionModule[] = [
+  base64,
   color,
   dataSize,
   jwt,

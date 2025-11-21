@@ -136,6 +136,10 @@ src/
 - `convert`: pretty-print JSON for header/payload; include signature segment as-is; add hint “Not verified—decode only”.
 - Security: decoding only; no secret/verification; safe for offline use.
 
+### Base64 Decode
+- `detect`: accept standard base64 or base64url strings (length >= 8, mostly alphanumeric), normalize/pad, decode to UTF-8, and bail out if the result is not mostly printable text; try parsing JSON from the decoded text.
+- `convert`: rows for `Decoded (UTF-8)` with a hint about the detected variant plus `Decoded JSON` when parsing succeeds.
+
 ## Biasing and Examples
 - The resolver optionally receives `biasModuleId` (from the SEO route config) and adds a small score bonus to that module during detection.
 - `exampleInput` (from route config) pre-populates the textarea and runs an initial conversion so the page immediately shows the relevant output and visuals.

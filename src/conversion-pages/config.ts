@@ -144,6 +144,13 @@ export const CONVERSION_PAGES: ConversionPageConfig[] = [
     biasModuleId: "jwt",
   },
   {
+    slug: "base64-decode",
+    title: "Base64 Decoder",
+    description: "Decode base64 or base64url strings into readable text and JSON.",
+    biasModuleId: "base64",
+    exampleInput: "U29ycnksIHRoaXMgaXMgYmFzZTYu",
+  },
+  {
     slug: "kb-to-mb",
     title: "KB to MB Converter",
     description: "Convert kilobytes to megabytes with 1024-base binary units.",
