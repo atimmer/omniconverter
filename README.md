@@ -1,10 +1,15 @@
 # Converter Unlimited
 
-A small Next.js (App Router) tool that converts CSS colors (hex, rgb(a), hsl(a), and named keywords) to RGB, RGBA, and Hex in one paste.
+A small Next.js (App Router) tool that auto-detects inputs and converts them inline. Today it handles:
+- CSS colors (hex, rgb/rgba, hsl/hsla, named keywords) → RGB, RGBA, Hex with a live swatch.
+- Mass (kg ↔ lb).
+- JWT decode (header + payload + signature, decode only).
+
+SEO-friendly landing pages (e.g., `/rgb-to-hsl`, `/kg-to-lb`, `/jwt-decode`) are statically generated and reuse the omni-converter with biased defaults and intro copy.
 
 ## Stack
 
-- Next.js 15
+- Next.js 16
 - React 19 + TypeScript
 - Tailwind CSS
 
@@ -20,9 +25,10 @@ A small Next.js (App Router) tool that converts CSS colors (hex, rgb(a), hsl(a),
 
 1. Install deps: `./runner pnpm install`.
 2. Start dev: `./runner pnpm dev` and open the app.
-3. Paste any supported CSS color (hex, rgb/rgba, hsl/hsla, named keyword) to see live conversions.
+3. Paste a supported value (color, mass, JWT) and see instant conversions. SEO routes prefill an example for that conversion.
 
 ## Notes
 
 - Tailwind classes are defined in `src/app/globals.css`.
-- Core UI lives in `src/app/page.tsx`; color parsing is in `src/utils/colorConverter.ts`.
+- Omni converter UI lives in `src/components/OmniConverter.tsx`; route configs for SEO pages live in `src/conversion-pages/config.ts`.
+- Conversion modules reside under `src/conversions/` with a small resolver; docs in `docs/ARCHITECTURE.MD`.
