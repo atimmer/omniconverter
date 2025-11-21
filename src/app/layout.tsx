@@ -1,6 +1,7 @@
 import Script from "next/script";
 import type { Metadata } from "next";
 import "./globals.css";
+import { Providers } from "../components/Providers";
 
 export const metadata: Metadata = {
   title: "Converter Unlimited",
@@ -26,7 +27,7 @@ export default function RootLayout({
         ) : null}
       </head>
       <body className="min-h-screen bg-slate-100 text-slate-900 antialiased">
-        {children}
+        <Providers>{children}</Providers>
       </body>
     </html>
   );
