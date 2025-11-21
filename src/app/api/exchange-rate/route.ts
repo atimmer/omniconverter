@@ -13,7 +13,7 @@ export const revalidate = cacheDurations.dailySeconds;
 type ErrorBody = { error: { code: string; message: string } };
 
 const badRequest = (code: string, message: string) =>
-  Response.json<ErrorBody>({ error: { code, message } }, { status: 400 });
+  Response.json({ error: { code, message } } satisfies ErrorBody, { status: 400 });
 
 export async function GET(request: NextRequest) {
   const from = request.nextUrl.searchParams.get("from");
