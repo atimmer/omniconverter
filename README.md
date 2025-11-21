@@ -1,6 +1,6 @@
 # Converter Unlimited
 
-A small Next.js (App Router) tool that converts `hsl()/hsla()` color values to RGB, RGBA, and Hex in one paste.
+A small Next.js (App Router) tool that converts CSS colors (hex, rgb(a), hsl(a), and named keywords) to RGB, RGBA, and Hex in one paste.
 
 ## Stack
 - Next.js 15
@@ -17,7 +17,7 @@ A small Next.js (App Router) tool that converts `hsl()/hsla()` color values to R
 ## Development
 1. Install deps: `./runner pnpm install`.
 2. Start dev: `./runner pnpm dev` and open the app.
-3. Paste an `hsl()` or `hsla()` value to see live conversions.
+3. Paste any supported CSS color (hex, rgb/rgba, hsl/hsla, named keyword) to see live conversions.
 
 ## Notes
 - Tailwind classes are defined in `src/app/globals.css`.

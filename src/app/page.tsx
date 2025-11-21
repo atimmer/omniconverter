@@ -1,7 +1,7 @@
 'use client'
 
 import { useEffect, useMemo, useRef, useState } from 'react'
-import { convertHslString } from '../utils/colorConverter'
+import { convertColorString } from '../utils/colorConverter'
 
 export default function Page() {
   const [input, setInput] = useState('')
@@ -11,16 +11,16 @@ export default function Page() {
     textareaRef.current?.focus()
   }, [])
 
-  const conversion = useMemo(() => convertHslString(input), [input])
+  const conversion = useMemo(() => convertColorString(input), [input])
 
   const helperText = useMemo(() => {
     if (input.trim().length === 0) {
-      return 'Paste an hsl()/hsla() color value to get started.'
+      return 'Paste any hex, rgb(a), hsl(a), or named CSS color to get started.'
     }
 
     return conversion
       ? 'Detected a valid color. See the conversions below.'
-      : 'That doesn\'t look like a valid hsl()/hsla() color yet.'
+      : 'That doesn\'t look like a supported CSS color yet (hex, rgb(a), hsl(a), named).'
   }, [conversion, input])
 
   return (
@@ -34,9 +34,10 @@ export default function Page() {
             Convert colors in one paste
           </h1>
           <p className="text-base text-slate-600">
-            Drop in your favorite <code className="rounded bg-slate-200 px-1 py-0.5 text-sm text-slate-800">hsl()</code> or
-            <code className="ml-1 rounded bg-slate-200 px-1 py-0.5 text-sm text-slate-800">hsla()</code> value and get instant RGB and
-            hex outputs.
+            Drop in your favorite <code className="rounded bg-slate-200 px-1 py-0.5 text-sm text-slate-800">hex</code>,
+            <code className="ml-1 rounded bg-slate-200 px-1 py-0.5 text-sm text-slate-800">rgb()</code>,
+            <code className="ml-1 rounded bg-slate-200 px-1 py-0.5 text-sm text-slate-800">hsl()</code>, or any named CSS color and get
+            instant conversions.
           </p>
         </header>
 
@@ -57,7 +58,7 @@ export default function Page() {
               spellCheck={false}
               value={input}
               onChange={(event) => setInput(event.target.value)}
-              placeholder="hsla(0, 0%, 43%, 1)"
+              placeholder="#c044ff, rgb(160, 40, 255), hsla(275, 70%, 55%, 0.6), rebeccapurple"
               className="h-40 w-full resize-y rounded-2xl border-0 bg-transparent p-6 text-base font-medium text-slate-900 outline-none focus:outline-none focus:ring-2 focus:ring-indigo-500"
             />
           </div>
@@ -90,7 +91,7 @@ export default function Page() {
             </div>
           ) : (
             <div className="rounded-2xl border border-dashed border-slate-200 bg-white p-6 text-sm text-slate-500 shadow-sm">
-              Paste an hsl/hsla color to see live conversions here.
+              Paste any supported CSS color to see live conversions here.
             </div>
           )}
         </section>

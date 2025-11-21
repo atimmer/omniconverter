@@ -3,7 +3,7 @@ import './globals.css'
 
 export const metadata: Metadata = {
   title: 'Converter Unlimited',
-  description: 'Convert HSL/HSLA colors to RGB and Hex instantly.',
+  description: 'Convert CSS colors (hex, rgb(a), hsl(a), and named) to RGB and Hex instantly.',
 }
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
