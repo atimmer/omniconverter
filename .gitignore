@@ -13,6 +13,7 @@ dist-ssr
 .next
 .vercel
 .turbo
+.env
 *.local
 
 # Editor directories and files
