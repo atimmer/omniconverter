@@ -1,25 +1,25 @@
 import js from '@eslint/js'
 import globals from 'globals'
 import nextPlugin from '@next/eslint-plugin-next'
-import { FlatCompat } from '@eslint/eslintrc'
 import tseslint from 'typescript-eslint'
 import { defineConfig } from 'eslint/config'
-import path from 'node:path'
-import url from 'node:url'
 
-const __dirname = path.dirname(url.fileURLToPath(import.meta.url))
-const compat = new FlatCompat({ baseDirectory: __dirname })
+const tsTypeChecked = tseslint.configs.recommendedTypeChecked.map((config) => ({
+  ...config,
+  files: ['**/*.{ts,tsx}'],
+}))
 
 export default defineConfig([
   {
-    ignores: ['.next/', 'dist/', 'node_modules/'],
+    ignores: ['.next/', '.vercel/', '.turbo/', 'dist/', 'node_modules/', 'scripts/**', 'next-env.d.ts'],
   },
-  // Next.js recommended rules converted for Flat config.
-  ...compat.extends('next', 'next/core-web-vitals'),
+  js.configs.recommended,
+  ...tsTypeChecked,
   {
     files: ['**/*.{ts,tsx,js,jsx}'],
     languageOptions: {
-      ecmaVersion: 2020,
+      ecmaVersion: 2022,
+      sourceType: 'module',
       globals: globals.browser,
       parserOptions: {
         projectService: true,
@@ -28,9 +28,13 @@ export default defineConfig([
     plugins: {
       '@next/next': nextPlugin,
     },
-    extends: [
-      js.configs.recommended,
-      ...tseslint.configs.recommendedTypeChecked,
-    ],
+    rules: {
+      ...nextPlugin.configs['core-web-vitals'].rules,
+    },
+    settings: {
+      react: {
+        version: 'detect',
+      },
+    },
   },
 ])
