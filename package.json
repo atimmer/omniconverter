@@ -4,11 +4,16 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
+    "docs:list": "bun scripts/docs-list.ts",
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint .",
-    "docs:list": "bun scripts/docs-list.ts"
+    "format": "prettier --write .",
+    "lint:prettier": "prettier --check .",
+    "lint:types": "tsc --noEmit --pretty false",
+    "lint:eslint": "eslint .",
+    "lint": "pnpm run lint:prettier && pnpm run lint:types && pnpm run lint:eslint",
+    "typecheck": "pnpm run lint:types"
   },
   "dependencies": {
     "next": "^16.0.3",
@@ -29,6 +34,7 @@
     "eslint-plugin-react-hooks": "^5.2.0",
     "globals": "^16.4.0",
     "postcss": "^8.5.6",
+    "prettier": "^3.6.2",
     "tailwindcss": "^3.4.17",
     "typescript": "~5.9.3",
     "typescript-eslint": "^8.45.0"

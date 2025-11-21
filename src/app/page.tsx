@@ -1,27 +1,27 @@
-'use client'
+"use client";
 
-import { useEffect, useMemo, useRef, useState } from 'react'
-import { convertColorString } from '../utils/colorConverter'
+import { useEffect, useMemo, useRef, useState } from "react";
+import { convertColorString } from "../utils/colorConverter";
 
 export default function Page() {
-  const [input, setInput] = useState('')
-  const textareaRef = useRef<HTMLTextAreaElement | null>(null)
+  const [input, setInput] = useState("");
+  const textareaRef = useRef<HTMLTextAreaElement | null>(null);
 
   useEffect(() => {
-    textareaRef.current?.focus()
-  }, [])
+    textareaRef.current?.focus();
+  }, []);
 
-  const conversion = useMemo(() => convertColorString(input), [input])
+  const conversion = useMemo(() => convertColorString(input), [input]);
 
   const helperText = useMemo(() => {
     if (input.trim().length === 0) {
-      return 'Paste any hex, rgb(a), hsl(a), or named CSS color to get started.'
+      return "Paste any hex, rgb(a), hsl(a), or named CSS color to get started.";
     }
 
     return conversion
-      ? 'Detected a valid color. See the conversions below.'
-      : 'That doesn\'t look like a supported CSS color yet (hex, rgb(a), hsl(a), named).'
-  }, [conversion, input])
+      ? "Detected a valid color. See the conversions below."
+      : "That doesn't look like a supported CSS color yet (hex, rgb(a), hsl(a), named).";
+  }, [conversion, input]);
 
   return (
     <div className="flex min-h-screen flex-col bg-slate-100">
@@ -34,16 +34,28 @@ export default function Page() {
             Convert colors in one paste
           </h1>
           <p className="text-base text-slate-600">
-            Drop in your favorite <code className="rounded bg-slate-200 px-1 py-0.5 text-sm text-slate-800">hex</code>,
-            <code className="ml-1 rounded bg-slate-200 px-1 py-0.5 text-sm text-slate-800">rgb()</code>,
-            <code className="ml-1 rounded bg-slate-200 px-1 py-0.5 text-sm text-slate-800">hsl()</code>, or any named CSS color and get
-            instant conversions.
+            Drop in your favorite{" "}
+            <code className="rounded bg-slate-200 px-1 py-0.5 text-sm text-slate-800">
+              hex
+            </code>
+            ,
+            <code className="ml-1 rounded bg-slate-200 px-1 py-0.5 text-sm text-slate-800">
+              rgb()
+            </code>
+            ,
+            <code className="ml-1 rounded bg-slate-200 px-1 py-0.5 text-sm text-slate-800">
+              hsl()
+            </code>
+            , or any named CSS color and get instant conversions.
           </p>
         </header>
 
         <section className="space-y-3">
           <div className="flex items-center justify-between">
-            <label htmlFor="color-input" className="text-sm font-medium text-slate-700">
+            <label
+              htmlFor="color-input"
+              className="text-sm font-medium text-slate-700"
+            >
               Color input
             </label>
             <span className="text-xs font-medium uppercase tracking-widest text-slate-400">
@@ -66,7 +78,9 @@ export default function Page() {
         </section>
 
         <section className="space-y-4">
-          <h2 className="text-sm font-semibold uppercase tracking-wider text-slate-500">Results</h2>
+          <h2 className="text-sm font-semibold uppercase tracking-wider text-slate-500">
+            Results
+          </h2>
           {conversion ? (
             <div className="grid gap-4 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm sm:grid-cols-[auto,1fr]">
               <div
@@ -76,16 +90,28 @@ export default function Page() {
               />
               <dl className="space-y-4">
                 <div>
-                  <dt className="text-xs font-semibold uppercase tracking-widest text-slate-400">RGB</dt>
-                  <dd className="font-mono text-lg text-slate-900">{conversion.rgbString}</dd>
+                  <dt className="text-xs font-semibold uppercase tracking-widest text-slate-400">
+                    RGB
+                  </dt>
+                  <dd className="font-mono text-lg text-slate-900">
+                    {conversion.rgbString}
+                  </dd>
                 </div>
                 <div>
-                  <dt className="text-xs font-semibold uppercase tracking-widest text-slate-400">RGBA</dt>
-                  <dd className="font-mono text-lg text-slate-900">{conversion.rgbaString}</dd>
+                  <dt className="text-xs font-semibold uppercase tracking-widest text-slate-400">
+                    RGBA
+                  </dt>
+                  <dd className="font-mono text-lg text-slate-900">
+                    {conversion.rgbaString}
+                  </dd>
                 </div>
                 <div>
-                  <dt className="text-xs font-semibold uppercase tracking-widest text-slate-400">Hex</dt>
-                  <dd className="font-mono text-lg text-slate-900">{conversion.hex}</dd>
+                  <dt className="text-xs font-semibold uppercase tracking-widest text-slate-400">
+                    Hex
+                  </dt>
+                  <dd className="font-mono text-lg text-slate-900">
+                    {conversion.hex}
+                  </dd>
                 </div>
               </dl>
             </div>
@@ -97,5 +123,5 @@ export default function Page() {
         </section>
       </main>
     </div>
-  )
+  );
 }
