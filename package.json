@@ -17,9 +17,11 @@
     "typecheck": "pnpm run lint:types"
   },
   "dependencies": {
+    "clsx": "^2.1.1",
     "next": "^16.0.3",
     "react": "^19.1.1",
-    "react-dom": "^19.1.1"
+    "react-dom": "^19.1.1",
+    "tailwind-merge": "^3.4.0"
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3.3.1",
