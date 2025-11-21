@@ -3,15 +3,16 @@ import OmniConverter from "../../components/OmniConverter";
 import { CONVERSION_PAGES } from "../../conversion-pages/config";
 
 type PageProps = {
-  params: { slug: string };
+  params: Promise<{ slug: string }>;
 };
 
 export function generateStaticParams() {
   return CONVERSION_PAGES.map((page) => ({ slug: page.slug }));
 }
 
-export function generateMetadata({ params }: PageProps) {
-  const config = CONVERSION_PAGES.find((page) => page.slug === params.slug);
+export async function generateMetadata({ params }: PageProps) {
+  const { slug } = await params;
+  const config = CONVERSION_PAGES.find((page) => page.slug === slug);
   if (!config) return {};
 
   return {
@@ -24,8 +25,9 @@ export function generateMetadata({ params }: PageProps) {
   };
 }
 
-export default function ConversionPage({ params }: PageProps) {
-  const config = CONVERSION_PAGES.find((page) => page.slug === params.slug);
+export default async function ConversionPage({ params }: PageProps) {
+  const { slug } = await params;
+  const config = CONVERSION_PAGES.find((page) => page.slug === slug);
   if (!config) {
     return notFound();
   }
