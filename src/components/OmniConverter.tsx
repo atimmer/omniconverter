@@ -4,6 +4,7 @@ import { useEffect, useMemo, useRef, useState } from "react";
 import { SuggestionForm } from "./SuggestionForm";
 import { modules, resolveConversion } from "../conversions";
 import type { OutputRow } from "../conversions/types";
+import { cn } from "../lib/utils";
 
 type OmniConverterProps = {
   biasModuleId?: string;
@@ -53,7 +54,9 @@ const ResultRows = ({ rows }: { rows: OutputRow[] }) => (
         </div>
         <div className="flex items-start justify-end gap-2 sm:ml-auto">
           <CopyButton text={row.copy ?? row.value} label="Copy" />
-          <CopyButton text={row.value} label="Copy with unit" />
+          {row.value !== (row.copy ?? row.value) ? (
+            <CopyButton text={row.value} label="Copy with unit" />
+          ) : null}
         </div>
       </div>
     ))}
@@ -78,6 +81,8 @@ export default function OmniConverter({
     () => resolveConversion(input, modules, { biasModuleId }),
     [input, biasModuleId],
   );
+
+  const hasHighlight = Boolean(resolution?.payload.highlight);
 
   const helperText = useMemo(() => {
     if (trimmedInput.length === 0) {
@@ -132,8 +137,13 @@ export default function OmniConverter({
           ) : null}
         </div>
         {resolution ? (
-          <div className="grid gap-4 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm sm:grid-cols-[auto_1fr]">
-            {resolution.payload.highlight ? (
+          <div
+            className={cn(
+              "grid gap-4 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm",
+              hasHighlight && "sm:grid-cols-[auto_1fr]",
+            )}
+          >
+            {hasHighlight ? (
               <div className="flex items-start justify-center sm:justify-start">
                 {resolution.payload.highlight}
               </div>

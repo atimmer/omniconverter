@@ -160,3 +160,4 @@ src/
 - i18n: module labels/rows can be translated via a shared dictionary.
 - Accessibility: ensure `renderHighlight` elements have `aria` labels (e.g., color swatch announced as “Color preview”).
 - Performance: modules are small; keep detection pure and fast to preserve instant feedback.
+- Styling helpers: when conditionally combining Tailwind classes, use the shared `cn` helper from `src/lib/utils` instead of template strings or manual concatenation. This keeps merges consistent with `tailwind-merge` and avoids layout bugs.
