@@ -214,7 +214,8 @@ export const CONVERSION_PAGES: ConversionPageConfig[] = [
   {
     slug: "l-to-gal",
     title: "Liters to Gallons Converter",
-    description: "Convert liters to US gallons instantly (plus cups, fl oz, and more).",
+    description:
+      "Convert liters to US gallons instantly (plus cups, fl oz, and more).",
     biasModuleId: "volume",
     exampleInput: "2 L",
   },

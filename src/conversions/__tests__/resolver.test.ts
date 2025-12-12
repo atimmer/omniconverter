@@ -39,6 +39,11 @@ describe("resolver", () => {
     expect(result?.module.id).toBe("volume");
   });
 
+  it("detects temperature notation", () => {
+    const result = resolveConversion("100 C", modules);
+    expect(result?.module.id).toBe("temperature");
+  });
+
   it("returns null for empty input", () => {
     expect(resolveConversion("   ", modules)).toBeNull();
   });
