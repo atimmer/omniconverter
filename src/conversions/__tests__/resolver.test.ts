@@ -34,6 +34,11 @@ describe("resolver", () => {
     expect(result?.module.id).toBe("windspeed");
   });
 
+  it("detects pressure notation", () => {
+    const result = resolveConversion("1013.25 hPa", modules);
+    expect(result?.module.id).toBe("pressure");
+  });
+
   it("detects data-size notation", () => {
     const result = resolveConversion("1024mb", modules);
     expect(result?.module.id).toBe("data-size");
