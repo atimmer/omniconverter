@@ -186,4 +186,18 @@ export const CONVERSION_PAGES: ConversionPageConfig[] = [
     biasModuleId: "data-size",
     exampleInput: "1048576 bytes",
   },
+  {
+    slug: "l-to-gal",
+    title: "Liters to Gallons Converter",
+    description: "Convert liters to US gallons instantly (plus cups, fl oz, and more).",
+    biasModuleId: "volume",
+    exampleInput: "2 L",
+  },
+  {
+    slug: "gal-to-l",
+    title: "Gallons to Liters Converter",
+    description: "Convert US gallons to liters instantly with one paste.",
+    biasModuleId: "volume",
+    exampleInput: "1 gal",
+  },
 ];

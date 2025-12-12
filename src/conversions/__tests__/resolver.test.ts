@@ -8,7 +8,9 @@ describe("resolver", () => {
   });
 
   it("biases toward configured module when scores tie", () => {
-    const result = resolveConversion("70 kg", modules, { biasModuleId: "mass" });
+    const result = resolveConversion("70 kg", modules, {
+      biasModuleId: "mass",
+    });
     expect(result?.module.id).toBe("mass");
   });
 
@@ -25,6 +27,11 @@ describe("resolver", () => {
   it("detects data-size notation", () => {
     const result = resolveConversion("1024mb", modules);
     expect(result?.module.id).toBe("data-size");
+  });
+
+  it("detects volume notation", () => {
+    const result = resolveConversion("2 L", modules);
+    expect(result?.module.id).toBe("volume");
   });
 
   it("returns null for empty input", () => {

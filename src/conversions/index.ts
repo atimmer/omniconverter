@@ -6,6 +6,7 @@ import jwt from "./jwt";
 import mass from "./mass";
 import power from "./power";
 import speed from "./speed";
+import volume from "./volume";
 import type {
   ConversionModule,
   ConversionResolution,
@@ -23,6 +24,7 @@ export const modules: ConversionModule[] = [
   mass,
   power,
   speed,
+  volume,
 ];
 
 export function resolveConversion(
