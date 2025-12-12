@@ -30,7 +30,7 @@ const tryParseJson = (raw: string): unknown => {
   try {
     return JSON.parse(raw) as unknown;
   } catch {
-    return null;
+    return undefined;
   }
 };
 
@@ -48,7 +48,9 @@ const detect = (raw: string): Detection | null => {
 
   const headerObj = tryParseJson(headerJson);
   const payloadObj = tryParseJson(payloadJson);
-  if (!headerObj || !payloadObj) return null;
+  if (headerObj === undefined || payloadObj === undefined) return null;
+  if (typeof headerObj !== "object" || headerObj === null) return null;
+  if (typeof payloadObj !== "object" || payloadObj === null) return null;
 
   const normalized: NormalizedJwt = {
     header: headerObj,

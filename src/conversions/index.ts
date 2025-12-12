@@ -8,6 +8,7 @@ import mass from "./mass";
 import power from "./power";
 import speed from "./speed";
 import volume from "./volume";
+import windspeed from "./windspeed";
 import type {
   ConversionModule,
   ConversionResolution,
@@ -27,6 +28,7 @@ export const modules: ConversionModule[] = [
   power,
   speed,
   volume,
+  windspeed,
 ];
 
 export function resolveConversion(

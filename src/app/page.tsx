@@ -13,9 +13,9 @@ export default function Page() {
           </h1>
           <p className="hidden text-base text-slate-600 sm:block">
             Drop in colors, weights, force (N, kN, lbf), power (W, kW, hp),
-            speeds (km/h, m/s, mph), data sizes, JWTs, and more. We auto-detect
-            the format, show rich previews (like color swatches), and give you
-            the exact values to copy.
+            speeds (km/h, m/s, mph), wind speeds (Bft), data sizes, JWTs, and
+            more. We auto-detect the format, show rich previews (like color
+            swatches), and give you the exact values to copy.
           </p>
         </header>
 

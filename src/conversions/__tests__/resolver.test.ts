@@ -29,6 +29,11 @@ describe("resolver", () => {
     expect(result?.module.id).toBe("force");
   });
 
+  it("detects Beaufort windspeed notation", () => {
+    const result = resolveConversion("1Bft", modules);
+    expect(result?.module.id).toBe("windspeed");
+  });
+
   it("detects data-size notation", () => {
     const result = resolveConversion("1024mb", modules);
     expect(result?.module.id).toBe("data-size");

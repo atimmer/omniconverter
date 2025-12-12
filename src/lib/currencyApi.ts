@@ -48,7 +48,8 @@ async function fetchCurrencyApi<T>(
     throw new Error(`currencyapi ${response.status}: ${message}`);
   }
 
-  return (await response.json()) as CurrencyApiResponse<T>;
+  const json = (await response.json()) as unknown;
+  return json as CurrencyApiResponse<T>;
 }
 
 export async function getAvailableCurrencies(): Promise<{
