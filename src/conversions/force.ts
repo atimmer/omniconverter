@@ -4,6 +4,7 @@ import type {
   Detection,
   OutputRow,
 } from "./types";
+import { formatFixedTrimmed } from "./formatNumber";
 
 type NormalizedForce = {
   newtons: number;
@@ -58,12 +59,12 @@ const detect = (raw: string): Detection | null => {
 
 const format = (value: number) => {
   const abs = Math.abs(value);
-  if (abs >= 1_000_000_000) return value.toFixed(0);
-  if (abs >= 1_000_000) return value.toFixed(1);
-  if (abs >= 100_000) return value.toFixed(2);
-  if (abs >= 10_000) return value.toFixed(3);
-  if (abs >= 1) return value.toFixed(4);
-  return value.toFixed(6);
+  if (abs >= 1_000_000_000) return formatFixedTrimmed(value, 0);
+  if (abs >= 1_000_000) return formatFixedTrimmed(value, 1);
+  if (abs >= 100_000) return formatFixedTrimmed(value, 2);
+  if (abs >= 10_000) return formatFixedTrimmed(value, 3);
+  if (abs >= 1) return formatFixedTrimmed(value, 4);
+  return formatFixedTrimmed(value, 6);
 };
 
 const toRows = ({ newtons }: NormalizedForce): OutputRow[] => {

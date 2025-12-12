@@ -4,6 +4,7 @@ import type {
   Detection,
   OutputRow,
 } from "./types";
+import { formatFixedTrimmed } from "./formatNumber";
 
 type BeaufortNormalized = {
   beaufort: number;
@@ -114,8 +115,8 @@ const BEAUFORT_RANGES: BeaufortRange[] = [
 
 const WINDSPEED_REGEX = /^(?<value>\d{1,2})\s*(?<unit>bft|beaufort)\s*$/i;
 
-const formatFixed1 = (value: number) => value.toFixed(1);
-const formatInt = (value: number) => value.toFixed(0);
+const formatFixed1 = (value: number) => formatFixedTrimmed(value, 1);
+const formatInt = (value: number) => formatFixedTrimmed(value, 0);
 
 const formatRange = (
   min: number,

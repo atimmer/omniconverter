@@ -4,6 +4,7 @@ import type {
   Detection,
   OutputRow,
 } from "./types";
+import { formatFixedTrimmed } from "./formatNumber";
 
 const MASS_REGEX =
   /^(?<value>-?\d+(?:\.\d+)?)\s*(?<unit>kg|kilogram|kilograms|lb|lbs|pound|pounds)\s*$/i;
@@ -33,10 +34,10 @@ const detect = (raw: string): Detection | null => {
 };
 
 const format = (value: number) => {
-  if (Math.abs(value) >= 10000) return value.toFixed(0);
-  if (Math.abs(value) >= 1000) return value.toFixed(1);
-  if (Math.abs(value) >= 1) return value.toFixed(2);
-  return value.toFixed(4);
+  if (Math.abs(value) >= 10000) return formatFixedTrimmed(value, 0);
+  if (Math.abs(value) >= 1000) return formatFixedTrimmed(value, 1);
+  if (Math.abs(value) >= 1) return formatFixedTrimmed(value, 2);
+  return formatFixedTrimmed(value, 4);
 };
 
 const toRows = ({ kg }: NormalizedMass): OutputRow[] => {

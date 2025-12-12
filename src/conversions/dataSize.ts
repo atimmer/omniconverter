@@ -4,6 +4,7 @@ import type {
   Detection,
   OutputRow,
 } from "./types";
+import { formatFixedTrimmed } from "./formatNumber";
 
 type NormalizedDataSize = {
   bytes: number;
@@ -32,11 +33,11 @@ const DATA_SIZE_REGEX =
 
 const format = (value: number) => {
   const abs = Math.abs(value);
-  if (abs >= 1e12) return value.toFixed(0);
-  if (abs >= 1e6) return value.toFixed(2);
-  if (abs >= 1e3) return value.toFixed(3);
-  if (abs >= 1) return value.toFixed(4);
-  return value.toFixed(6);
+  if (abs >= 1e12) return formatFixedTrimmed(value, 0);
+  if (abs >= 1e6) return formatFixedTrimmed(value, 2);
+  if (abs >= 1e3) return formatFixedTrimmed(value, 3);
+  if (abs >= 1) return formatFixedTrimmed(value, 4);
+  return formatFixedTrimmed(value, 6);
 };
 
 const detect = (raw: string): Detection | null => {

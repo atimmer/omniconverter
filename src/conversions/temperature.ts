@@ -4,6 +4,7 @@ import type {
   Detection,
   OutputRow,
 } from "./types";
+import { formatFixedTrimmed } from "./formatNumber";
 
 type NormalizedTemperature = {
   kelvin: number;
@@ -53,10 +54,10 @@ const detect = (raw: string): Detection | null => {
 
 const format = (value: number) => {
   const abs = Math.abs(value);
-  if (abs >= 1000) return value.toFixed(0);
-  if (abs >= 100) return value.toFixed(1);
-  if (abs >= 1) return value.toFixed(2);
-  return value.toFixed(4);
+  if (abs >= 1000) return formatFixedTrimmed(value, 0);
+  if (abs >= 100) return formatFixedTrimmed(value, 1);
+  if (abs >= 1) return formatFixedTrimmed(value, 2);
+  return formatFixedTrimmed(value, 4);
 };
 
 const toRows = ({ kelvin }: NormalizedTemperature): OutputRow[] => {

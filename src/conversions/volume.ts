@@ -4,6 +4,7 @@ import type {
   Detection,
   OutputRow,
 } from "./types";
+import { formatFixedTrimmed } from "./formatNumber";
 
 type NormalizedVolume = {
   liters: number;
@@ -93,12 +94,12 @@ const detect = (raw: string): Detection | null => {
 
 const format = (value: number) => {
   const abs = Math.abs(value);
-  if (abs >= 1_000_000) return value.toFixed(0);
-  if (abs >= 10_000) return value.toFixed(1);
-  if (abs >= 100) return value.toFixed(3);
-  if (abs >= 1) return value.toFixed(4);
-  if (abs >= 0.01) return value.toFixed(6);
-  return value.toFixed(8);
+  if (abs >= 1_000_000) return formatFixedTrimmed(value, 0);
+  if (abs >= 10_000) return formatFixedTrimmed(value, 1);
+  if (abs >= 100) return formatFixedTrimmed(value, 3);
+  if (abs >= 1) return formatFixedTrimmed(value, 4);
+  if (abs >= 0.01) return formatFixedTrimmed(value, 6);
+  return formatFixedTrimmed(value, 8);
 };
 
 const toRows = ({ liters }: NormalizedVolume): OutputRow[] => {
