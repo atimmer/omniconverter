@@ -4,13 +4,17 @@ import powerModule from "../power";
 describe("power module", () => {
   it("detects kilowatts and normalizes to watts", () => {
     const detection = powerModule.detect("2.5 kW");
-    const normalized = detection?.normalizedInput as { watts: number } | undefined;
+    const normalized = detection?.normalizedInput as
+      | { watts: number }
+      | undefined;
     expect(normalized?.watts).toBeCloseTo(2500, 3);
   });
 
   it("detects horsepower and converts to watts", () => {
     const detection = powerModule.detect("1 hp");
-    const normalized = detection?.normalizedInput as { watts: number } | undefined;
+    const normalized = detection?.normalizedInput as
+      | { watts: number }
+      | undefined;
     expect(normalized?.watts).toBeCloseTo(745.699872, 6);
   });
 
@@ -21,7 +25,9 @@ describe("power module", () => {
 
   it("detects inputs with non-breaking spaces", () => {
     const detection = powerModule.detect("150\u00a0kW");
-    const normalized = detection?.normalizedInput as { watts: number } | undefined;
+    const normalized = detection?.normalizedInput as
+      | { watts: number }
+      | undefined;
     expect(normalized?.watts).toBeCloseTo(150_000, 3);
   });
 

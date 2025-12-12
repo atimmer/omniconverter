@@ -11,25 +11,29 @@ export const CONVERSION_PAGES: ConversionPageConfig[] = [
   {
     slug: "rgb-to-hsl",
     title: "RGB to HSL Converter",
-    description: "Convert RGB colors to HSL instantly with a live color preview.",
+    description:
+      "Convert RGB colors to HSL instantly with a live color preview.",
     biasModuleId: "color",
   },
   {
     slug: "rgb-to-hex",
     title: "RGB to Hex Converter",
-    description: "Convert RGB colors to Hex instantly with a live color preview.",
+    description:
+      "Convert RGB colors to Hex instantly with a live color preview.",
     biasModuleId: "color",
   },
   {
     slug: "hex-to-rgb",
     title: "Hex to RGB Converter",
-    description: "Translate Hex colors to RGB with an immediate swatch preview.",
+    description:
+      "Translate Hex colors to RGB with an immediate swatch preview.",
     biasModuleId: "color",
   },
   {
     slug: "rgba-to-hsla",
     title: "RGBA to HSLA Converter",
-    description: "Translate RGBA colors to HSLA and hex with transparency preserved.",
+    description:
+      "Translate RGBA colors to HSLA and hex with transparency preserved.",
     biasModuleId: "color",
   },
   {
@@ -41,7 +45,8 @@ export const CONVERSION_PAGES: ConversionPageConfig[] = [
   {
     slug: "hex-to-rgba",
     title: "Hex to RGBA Converter",
-    description: "Expand hex codes into RGBA with alpha preserved when present.",
+    description:
+      "Expand hex codes into RGBA with alpha preserved when present.",
     biasModuleId: "color",
   },
   {
@@ -89,13 +94,15 @@ export const CONVERSION_PAGES: ConversionPageConfig[] = [
   {
     slug: "ms-to-kmh",
     title: "m/s to km/h Converter",
-    description: "Switch meters per second into kilometers per hour in one paste.",
+    description:
+      "Switch meters per second into kilometers per hour in one paste.",
     biasModuleId: "speed",
   },
   {
     slug: "mph-to-kmh",
     title: "mph to km/h Converter",
-    description: "Convert miles per hour to kilometers per hour with one paste.",
+    description:
+      "Convert miles per hour to kilometers per hour with one paste.",
     biasModuleId: "speed",
   },
   {
@@ -113,7 +120,8 @@ export const CONVERSION_PAGES: ConversionPageConfig[] = [
   {
     slug: "kw-to-hp",
     title: "kW to HP Converter",
-    description: "Convert kilowatts to horsepower for engines, EVs, and motors.",
+    description:
+      "Convert kilowatts to horsepower for engines, EVs, and motors.",
     biasModuleId: "power",
     exampleInput: "75 kW",
   },
@@ -139,9 +147,24 @@ export const CONVERSION_PAGES: ConversionPageConfig[] = [
     exampleInput: "1.5 kW",
   },
   {
+    slug: "n-to-lbf",
+    title: "Newtons to lbf Converter",
+    description: "Convert Newtons (N) to pound-force (lbf) instantly.",
+    biasModuleId: "force",
+    exampleInput: "1000 N",
+  },
+  {
+    slug: "lbf-to-n",
+    title: "lbf to Newtons Converter",
+    description: "Convert pound-force (lbf) to Newtons (N) instantly.",
+    biasModuleId: "force",
+    exampleInput: "225 lbf",
+  },
+  {
     slug: "jwt-decode",
     title: "Decode JWT Tokens",
-    description: "Inspect JWT headers and payloads without verifying signatures.",
+    description:
+      "Inspect JWT headers and payloads without verifying signatures.",
     biasModuleId: "jwt",
   },
   {
@@ -154,7 +177,8 @@ export const CONVERSION_PAGES: ConversionPageConfig[] = [
   {
     slug: "base64-decode",
     title: "Base64 Decoder",
-    description: "Decode base64 or base64url strings into readable text and JSON.",
+    description:
+      "Decode base64 or base64url strings into readable text and JSON.",
     biasModuleId: "base64",
     exampleInput: "U29ycnksIHRoaXMgaXMgYmFzZTYu",
   },
@@ -182,7 +206,8 @@ export const CONVERSION_PAGES: ConversionPageConfig[] = [
   {
     slug: "bytes-to-mb",
     title: "Bytes to MB Converter",
-    description: "Turn raw bytes into megabytes using binary (1024) conversion.",
+    description:
+      "Turn raw bytes into megabytes using binary (1024) conversion.",
     biasModuleId: "data-size",
     exampleInput: "1048576 bytes",
   },

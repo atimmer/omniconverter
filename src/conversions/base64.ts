@@ -17,19 +17,23 @@ const PRINTABLE_CHAR = /[\t\r\n\x20-\x7E]/;
 
 const isMostlyPrintable = (value: string): boolean => {
   if (value.length === 0) return false;
-  const printableCount = Array.from(value).filter((char) => PRINTABLE_CHAR.test(char)).length;
+  const printableCount = Array.from(value).filter((char) =>
+    PRINTABLE_CHAR.test(char),
+  ).length;
   return printableCount / value.length >= 0.85;
 };
 
-const tryParseJson = (value: string): unknown | undefined => {
+const tryParseJson = (value: string): unknown => {
   try {
     return JSON.parse(value);
-  } catch (error) {
+  } catch {
     return undefined;
   }
 };
 
-const decodeSegment = (input: string): { decoded: string; variant: "base64" | "base64url" } | null => {
+const decodeSegment = (
+  input: string,
+): { decoded: string; variant: "base64" | "base64url" } | null => {
   const trimmed = input.trim();
   if (trimmed.length < 8) return null;
   if (!/[A-Za-z]/.test(trimmed)) return null;
@@ -59,10 +63,12 @@ const decodeSegment = (input: string): { decoded: string; variant: "base64" | "b
     const isUnpadded = !trimmed.includes("=");
     const lacksStdSymbols = !/[+/]/.test(trimmed);
     const variant: "base64" | "base64url" =
-      usesUrlChars || (isUrlLike && isUnpadded && lacksStdSymbols) ? "base64url" : "base64";
+      usesUrlChars || (isUrlLike && isUnpadded && lacksStdSymbols)
+        ? "base64url"
+        : "base64";
 
     return { decoded, variant };
-  } catch (error) {
+  } catch {
     return null;
   }
 };

@@ -23,9 +23,7 @@ export function SuggestionForm({
     setExpectedOutput("");
   }, [trimmedInput]);
 
-  const handleSuggestionSubmit = (
-    event: React.FormEvent<HTMLFormElement>,
-  ) => {
+  const handleSuggestionSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
     const subject = "Converter suggestion";

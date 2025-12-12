@@ -37,7 +37,11 @@ const detect = (raw: string): Detection | null => {
     metersPerSecond = value;
   } else if (unit.startsWith("km")) {
     metersPerSecond = value / KMH_PER_MPS;
-  } else if (unit.startsWith("mph") || unit.startsWith("mi/") || unit.startsWith("miles")) {
+  } else if (
+    unit.startsWith("mph") ||
+    unit.startsWith("mi/") ||
+    unit.startsWith("miles")
+  ) {
     metersPerSecond = value / MPH_PER_MPS;
   } else {
     return null;
@@ -75,7 +79,10 @@ const toRows = ({ metersPerSecond }: NormalizedSpeed): OutputRow[] => {
   ];
 };
 
-const convert = (detection: Detection, raw: string): ConversionPayload | null => {
+const convert = (
+  detection: Detection,
+  raw: string,
+): ConversionPayload | null => {
   if (!raw) return null;
   const normalized = detection.normalizedInput as NormalizedSpeed | undefined;
   if (!normalized) return null;

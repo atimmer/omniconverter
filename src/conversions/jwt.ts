@@ -21,15 +21,15 @@ const base64UrlDecode = (segment: string): string | null => {
 
     // Node/bun fallback
     return Buffer.from(padded, "base64").toString("utf8");
-  } catch (error) {
+  } catch {
     return null;
   }
 };
 
-const tryParseJson = (raw: string) => {
+const tryParseJson = (raw: string): unknown => {
   try {
-    return JSON.parse(raw);
-  } catch (error) {
+    return JSON.parse(raw) as unknown;
+  } catch {
     return null;
   }
 };

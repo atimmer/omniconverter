@@ -114,7 +114,7 @@ export default function OmniConverter({
             spellCheck={false}
             value={input}
             onChange={(event) => setInput(event.target.value)}
-            placeholder="#c044ff, 70 kg, 90 km/h, 2.5 kW, eyJhbGciOi..."
+            placeholder="#c044ff, 70 kg, 90 km/h, 2.5 kW, 1000 N, eyJhbGciOi..."
             className="h-40 w-full resize-y rounded-2xl border-0 bg-transparent p-6 text-base font-medium text-slate-900 outline-none focus:outline-none focus:ring-2 focus:ring-indigo-500"
           />
         </div>

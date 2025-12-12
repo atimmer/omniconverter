@@ -24,6 +24,11 @@ describe("resolver", () => {
     expect(result?.module.id).toBe("speed");
   });
 
+  it("detects force notation", () => {
+    const result = resolveConversion("10 N", modules);
+    expect(result?.module.id).toBe("force");
+  });
+
   it("detects data-size notation", () => {
     const result = resolveConversion("1024mb", modules);
     expect(result?.module.id).toBe("data-size");

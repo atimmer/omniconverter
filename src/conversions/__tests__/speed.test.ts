@@ -4,19 +4,25 @@ import speedModule from "../speed";
 describe("speed module", () => {
   it("detects km/h input and normalizes to m/s", () => {
     const detection = speedModule.detect("36 km/h");
-    const normalized = detection?.normalizedInput as { metersPerSecond: number };
+    const normalized = detection?.normalizedInput as {
+      metersPerSecond: number;
+    };
     expect(normalized.metersPerSecond).toBeCloseTo(10, 5);
   });
 
   it("detects m/s input", () => {
     const detection = speedModule.detect("5 m/s");
-    const normalized = detection?.normalizedInput as { metersPerSecond: number };
+    const normalized = detection?.normalizedInput as {
+      metersPerSecond: number;
+    };
     expect(normalized.metersPerSecond).toBeCloseTo(5, 5);
   });
 
   it("detects mph input and normalizes to m/s", () => {
     const detection = speedModule.detect("60 mph");
-    const normalized = detection?.normalizedInput as { metersPerSecond: number };
+    const normalized = detection?.normalizedInput as {
+      metersPerSecond: number;
+    };
     expect(normalized.metersPerSecond).toBeCloseTo(26.8224, 4);
   });
 
