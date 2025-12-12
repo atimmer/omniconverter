@@ -1,6 +1,7 @@
 # Converter Unlimited
 
 A small Next.js (App Router) tool that auto-detects inputs and converts them inline. Today it handles:
+
 - CSS colors (hex, rgb/rgba, hsl/hsla, named keywords) → RGB, RGBA, Hex with a live swatch.
 - Mass (kg ↔ lb).
 - Speed (km/h ↔ m/s ↔ mph).

@@ -13,11 +13,11 @@ const encodeToBase64 = (value: string): string | null => {
     if (typeof btoa === "function") {
       const utf8 = encodeURIComponent(value).replace(
         /%([0-9A-F]{2})/g,
-        (_, hex) => String.fromCharCode(parseInt(hex, 16)),
+        (_: string, hex: string) => String.fromCharCode(parseInt(hex, 16)),
       );
       return btoa(utf8);
     }
-  } catch (error) {
+  } catch {
     return null;
   }
 
@@ -28,7 +28,10 @@ const toRows = (raw: string): OutputRow[] => {
   const base64 = encodeToBase64(raw);
   if (!base64) return [];
 
-  const base64url = base64.replace(/\+/g, "-").replace(/\//g, "_").replace(/=+$/, "");
+  const base64url = base64
+    .replace(/\+/g, "-")
+    .replace(/\//g, "_")
+    .replace(/=+$/, "");
 
   return [
     {

@@ -2,6 +2,7 @@ import base64 from "./base64";
 import color from "./color";
 import currency from "./currency";
 import dataSize from "./dataSize";
+import force from "./force";
 import jwt from "./jwt";
 import mass from "./mass";
 import power from "./power";
@@ -19,6 +20,7 @@ export const modules: ConversionModule[] = [
   color,
   currency,
   dataSize,
+  force,
   jwt,
   mass,
   power,

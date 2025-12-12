@@ -28,7 +28,7 @@ export default function CopyButton({
   return (
     <button
       type="button"
-      onClick={handleCopy}
+      onClick={() => void handleCopy()}
       className={cn(
         "inline-flex items-center rounded-md border border-slate-200 font-semibold text-slate-700 transition hover:bg-slate-100 active:translate-y-px",
         size === "md" ? "px-3 py-1.5 text-sm" : "px-2.5 py-1 text-xs",

@@ -12,7 +12,9 @@ describe("base64 module", () => {
     expect(normalized.decoded).toBe("Hello, Converter!");
 
     const payload = base64Module.convert(detection, input);
-    const decodedRow = payload?.rows.find((row) => row.label === "Decoded (UTF-8)");
+    const decodedRow = payload?.rows.find(
+      (row) => row.label === "Decoded (UTF-8)",
+    );
     expect(decodedRow?.value).toBe("Hello, Converter!");
   });
 

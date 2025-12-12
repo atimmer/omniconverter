@@ -101,7 +101,9 @@ const toRows = ({ bytes }: NormalizedDataSize): OutputRow[] => {
 };
 
 const convert = (detection: Detection): ConversionPayload | null => {
-  const normalized = detection.normalizedInput as NormalizedDataSize | undefined;
+  const normalized = detection.normalizedInput as
+    | NormalizedDataSize
+    | undefined;
   if (!normalized) return null;
 
   return { rows: toRows(normalized) };

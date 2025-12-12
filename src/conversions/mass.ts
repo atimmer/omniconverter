@@ -5,7 +5,8 @@ import type {
   OutputRow,
 } from "./types";
 
-const MASS_REGEX = /^(?<value>-?\d+(?:\.\d+)?)\s*(?<unit>kg|kilogram|kilograms|lb|lbs|pound|pounds)\s*$/i;
+const MASS_REGEX =
+  /^(?<value>-?\d+(?:\.\d+)?)\s*(?<unit>kg|kilogram|kilograms|lb|lbs|pound|pounds)\s*$/i;
 const KG_TO_LB = 2.20462262;
 
 type NormalizedMass = {
@@ -41,8 +42,18 @@ const format = (value: number) => {
 const toRows = ({ kg }: NormalizedMass): OutputRow[] => {
   const lbs = kg * KG_TO_LB;
   return [
-    { label: "Kilograms", value: `${format(kg)} kg`, copy: kg.toString(), hint: "Metric" },
-    { label: "Pounds", value: `${format(lbs)} lb`, copy: lbs.toString(), hint: "Imperial" },
+    {
+      label: "Kilograms",
+      value: `${format(kg)} kg`,
+      copy: kg.toString(),
+      hint: "Metric",
+    },
+    {
+      label: "Pounds",
+      value: `${format(lbs)} lb`,
+      copy: lbs.toString(),
+      hint: "Imperial",
+    },
   ];
 };
 

@@ -8,9 +8,11 @@ describe("jwt module", () => {
   it("detects and decodes a valid JWT", () => {
     const detection = jwtModule.detect(sampleJwt);
     expect(detection?.score).toBeGreaterThan(0.5);
-    const normalized = detection?.normalizedInput as any;
-    expect(normalized?.header.alg).toBe("HS256");
-    expect(normalized?.payload.sub).toBe("1234567890");
+    const normalized = detection?.normalizedInput as
+      | { header?: { alg?: string }; payload?: { sub?: string } }
+      | undefined;
+    expect(normalized?.header?.alg).toBe("HS256");
+    expect(normalized?.payload?.sub).toBe("1234567890");
   });
 
   it("converts decoded data into rows", () => {

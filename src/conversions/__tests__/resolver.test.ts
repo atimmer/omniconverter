@@ -8,7 +8,9 @@ describe("resolver", () => {
   });
 
   it("biases toward configured module when scores tie", () => {
-    const result = resolveConversion("70 kg", modules, { biasModuleId: "mass" });
+    const result = resolveConversion("70 kg", modules, {
+      biasModuleId: "mass",
+    });
     expect(result?.module.id).toBe("mass");
   });
 
@@ -20,6 +22,11 @@ describe("resolver", () => {
   it("detects mph speed notation", () => {
     const result = resolveConversion("60 mph", modules);
     expect(result?.module.id).toBe("speed");
+  });
+
+  it("detects force notation", () => {
+    const result = resolveConversion("10 N", modules);
+    expect(result?.module.id).toBe("force");
   });
 
   it("detects data-size notation", () => {

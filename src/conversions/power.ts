@@ -16,8 +16,7 @@ const WATTS_PER_KILOWATT = 1000;
 const WATTS_PER_MEGAWATT = 1_000_000;
 const WATTS_PER_HP = 745.699872; // mechanical horsepower
 
-const normalizeSpacing = (raw: string) =>
-  raw.replace(/[\u00a0\u202f]/g, " ");
+const normalizeSpacing = (raw: string) => raw.replace(/[\u00a0\u202f]/g, " ");
 
 const detect = (raw: string): Detection | null => {
   const match = normalizeSpacing(raw).trim().match(POWER_REGEX);

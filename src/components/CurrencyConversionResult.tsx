@@ -77,7 +77,10 @@ const formatAsOf = (asOf?: string | null) => {
   });
 };
 
-export default function CurrencyConversionResult({ amount, currencyCode }: Props) {
+export default function CurrencyConversionResult({
+  amount,
+  currencyCode,
+}: Props) {
   const uppercase = currencyCode.toUpperCase();
   const targets = useMemo(
     () => TARGETS.filter((target) => target !== uppercase),
@@ -114,7 +117,9 @@ export default function CurrencyConversionResult({ amount, currencyCode }: Props
         <p className="text-sm text-slate-500">Fetching daily rates…</p>
       ) : anyError ? (
         <p className="text-sm text-rose-600">
-          {anyError instanceof Error ? anyError.message : "Could not load rates."}
+          {anyError instanceof Error
+            ? anyError.message
+            : "Could not load rates."}
         </p>
       ) : (
         <div className="grid gap-3">
@@ -153,10 +158,7 @@ export default function CurrencyConversionResult({ amount, currencyCode }: Props
 
                 <div className="ml-auto flex items-center gap-2">
                   <CopyButton text={plainAmount} label="Copy" />
-                  <CopyButton
-                    text={amountWithUnit}
-                    label="Copy with unit"
-                  />
+                  <CopyButton text={amountWithUnit} label="Copy with unit" />
                 </div>
               </div>
             );

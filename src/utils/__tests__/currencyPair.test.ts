@@ -8,7 +8,10 @@ describe("parseCurrencyPair", () => {
   });
 
   it("parses lowercase strings with spaces", () => {
-    expect(parseCurrencyPair("gbp to jpy")).toEqual({ base: "GBP", quote: "JPY" });
+    expect(parseCurrencyPair("gbp to jpy")).toEqual({
+      base: "GBP",
+      quote: "JPY",
+    });
   });
 
   it("returns null for invalid input", () => {

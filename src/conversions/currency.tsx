@@ -94,7 +94,9 @@ const detect = (raw: string): Detection | null => {
 };
 
 const convert = (detection: Detection): ConversionPayload | null => {
-  const normalized = detection.normalizedInput as NormalizedCurrency | undefined;
+  const normalized = detection.normalizedInput as
+    | NormalizedCurrency
+    | undefined;
   if (!normalized) return null;
 
   return {

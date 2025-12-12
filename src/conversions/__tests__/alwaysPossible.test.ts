@@ -3,10 +3,7 @@ import { resolveAlwaysPossible } from "..";
 import base64EncodeModule from "../base64Encode";
 import type { AlwaysPossibleModule } from "../types";
 
-const stubModule = (
-  id: string,
-  heuristic: number,
-): AlwaysPossibleModule => ({
+const stubModule = (id: string, heuristic: number): AlwaysPossibleModule => ({
   id,
   label: id,
   convert: (raw) => ({ rows: [{ label: "echo", value: raw }] }),
