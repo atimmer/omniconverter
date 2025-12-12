@@ -14,4 +14,3 @@ export function formatFixedTrimmed(value: number, fractionDigits: number) {
   // Avoid rendering "-0" after rounding.
   return trimmed === "-0" ? "0" : trimmed;
 }
-

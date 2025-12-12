@@ -28,8 +28,7 @@ const dbzToMillimetersPerHour = (dbz: number): number => {
 };
 
 const millimetersPerHourToDbz = (millimetersPerHour: number): number => {
-  const z =
-    MARSHALL_PALMER_ZR_A * millimetersPerHour ** MARSHALL_PALMER_ZR_B;
+  const z = MARSHALL_PALMER_ZR_A * millimetersPerHour ** MARSHALL_PALMER_ZR_B;
   return 10 * Math.log10(z);
 };
 
@@ -75,7 +74,8 @@ const detect = (raw: string): Detection | null => {
     return null;
   }
 
-  if (!Number.isFinite(millimetersPerHour) || !Number.isFinite(dbz)) return null;
+  if (!Number.isFinite(millimetersPerHour) || !Number.isFinite(dbz))
+    return null;
 
   return {
     score: 0.84,
@@ -83,9 +83,11 @@ const detect = (raw: string): Detection | null => {
   };
 };
 
-const toRows = ({ millimetersPerHour, dbz }: NormalizedRainRate): OutputRow[] => {
-  const zrHint =
-    "Assumes Marshall–Palmer Z–R: Z = 200·R^1.6 (R in mm/h).";
+const toRows = ({
+  millimetersPerHour,
+  dbz,
+}: NormalizedRainRate): OutputRow[] => {
+  const zrHint = "Assumes Marshall–Palmer Z–R: Z = 200·R^1.6 (R in mm/h).";
 
   return [
     {
@@ -104,7 +106,9 @@ const toRows = ({ millimetersPerHour, dbz }: NormalizedRainRate): OutputRow[] =>
 };
 
 const convert = (detection: Detection): ConversionPayload | null => {
-  const normalized = detection.normalizedInput as NormalizedRainRate | undefined;
+  const normalized = detection.normalizedInput as
+    | NormalizedRainRate
+    | undefined;
   if (!normalized) return null;
 
   return { rows: toRows(normalized) };

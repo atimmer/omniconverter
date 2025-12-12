@@ -94,9 +94,14 @@ const toRows = ({ pascals }: NormalizedPressure): OutputRow[] => {
   ];
 };
 
-const convert = (detection: Detection, raw: string): ConversionPayload | null => {
+const convert = (
+  detection: Detection,
+  raw: string,
+): ConversionPayload | null => {
   if (!raw) return null;
-  const normalized = detection.normalizedInput as NormalizedPressure | undefined;
+  const normalized = detection.normalizedInput as
+    | NormalizedPressure
+    | undefined;
   if (!normalized) return null;
   if (!Number.isFinite(normalized.pascals)) return null;
 

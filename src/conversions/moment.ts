@@ -93,7 +93,10 @@ const detectMomentFromUnitKey = (
     const c = footPoundMatch.groups.c;
     const d = footPoundMatch.groups.d;
 
-    if ((a && b && isPoundForce(a) && isFoot(b)) || (c && d && isFoot(c) && isPoundForce(d))) {
+    if (
+      (a && b && isPoundForce(a) && isFoot(b)) ||
+      (c && d && isFoot(c) && isPoundForce(d))
+    ) {
       return { newtonMeters: value * NEWTONS_PER_LBF * METERS_PER_FOOT };
     }
   }
@@ -107,7 +110,10 @@ const detectMomentFromUnitKey = (
     const c = inchPoundMatch.groups.c;
     const d = inchPoundMatch.groups.d;
 
-    if ((a && b && isPoundForce(a) && isInch(b)) || (c && d && isInch(c) && isPoundForce(d))) {
+    if (
+      (a && b && isPoundForce(a) && isInch(b)) ||
+      (c && d && isInch(c) && isPoundForce(d))
+    ) {
       return { newtonMeters: value * NEWTONS_PER_LBF * METERS_PER_INCH };
     }
   }
@@ -186,7 +192,8 @@ const toRows = ({ newtonMeters }: NormalizedMoment): OutputRow[] => {
   const poundFeet = newtonMeters / (NEWTONS_PER_LBF * METERS_PER_FOOT);
   const poundInches = newtonMeters / (NEWTONS_PER_LBF * METERS_PER_INCH);
   const kilogramForceMeters = newtonMeters / NEWTONS_PER_KGF;
-  const kilogramForceCentimeters = newtonMeters / (NEWTONS_PER_KGF * METERS_PER_CM);
+  const kilogramForceCentimeters =
+    newtonMeters / (NEWTONS_PER_KGF * METERS_PER_CM);
 
   return [
     {
@@ -254,4 +261,3 @@ const momentModule: ConversionModule = {
 };
 
 export default momentModule;
-

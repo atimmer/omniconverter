@@ -11,6 +11,7 @@ import pressure from "./pressure";
 import rainRate from "./rainRate";
 import speed from "./speed";
 import temperature from "./temperature";
+import time from "./time";
 import volume from "./volume";
 import windspeed from "./windspeed";
 import type {
@@ -35,6 +36,7 @@ export const modules: ConversionModule[] = [
   rainRate,
   speed,
   temperature,
+  time,
   volume,
   windspeed,
 ];

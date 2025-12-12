@@ -34,7 +34,9 @@ describe("base64 module", () => {
     if (!detection) throw new Error("Detection failed");
 
     const payload = base64Module.convert(detection, input);
-    const decodedRow = payload?.rows.find((row) => row.label === "Decoded (UTF-8)");
+    const decodedRow = payload?.rows.find(
+      (row) => row.label === "Decoded (UTF-8)",
+    );
     expect(decodedRow?.value).toBe("100kg");
   });
 

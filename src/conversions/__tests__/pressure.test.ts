@@ -4,19 +4,25 @@ import pressureModule from "../pressure";
 describe("pressure module", () => {
   it("detects hPa input and normalizes to pascals", () => {
     const detection = pressureModule.detect("1013.25 hPa");
-    const normalized = detection?.normalizedInput as { pascals: number } | undefined;
+    const normalized = detection?.normalizedInput as
+      | { pascals: number }
+      | undefined;
     expect(normalized?.pascals).toBeCloseTo(101_325, 6);
   });
 
   it("treats mbar as equivalent to hPa", () => {
     const detection = pressureModule.detect("1013.25 mbar");
-    const normalized = detection?.normalizedInput as { pascals: number } | undefined;
+    const normalized = detection?.normalizedInput as
+      | { pascals: number }
+      | undefined;
     expect(normalized?.pascals).toBeCloseTo(101_325, 6);
   });
 
   it("detects mmHg input and normalizes using 1 atm = 760 mmHg", () => {
     const detection = pressureModule.detect("760 mmHg");
-    const normalized = detection?.normalizedInput as { pascals: number } | undefined;
+    const normalized = detection?.normalizedInput as
+      | { pascals: number }
+      | undefined;
     expect(normalized?.pascals).toBeCloseTo(101_325, 6);
   });
 
@@ -37,4 +43,3 @@ describe("pressure module", () => {
     expect(parseFloat(mmhgRow?.copy ?? "")).toBeCloseTo(760, 6);
   });
 });
-
