@@ -39,36 +39,48 @@ export const modules: ConversionModule[] = [
   windspeed,
 ];
 
+export function resolveConversions(
+  raw: string,
+  available: ConversionModule[] = modules,
+  options: ResolverOptions = {},
+): ConversionResolution[] {
+  const trimmed = raw.trim();
+  if (trimmed.length === 0) return [];
+
+  const resolutions = available
+    .map((module) => {
+      const detection = module.detect(trimmed);
+      if (!detection) return null;
+
+      const biasBoost = options.biasModuleId === module.id ? 0.1 : 0;
+      const effectiveScore = detection.score + biasBoost;
+
+      const payload = module.convert(detection, trimmed);
+      if (!payload) return null;
+
+      const resolution: ConversionResolution = {
+        module,
+        detection: { ...detection, score: effectiveScore },
+        payload,
+      };
+
+      return resolution;
+    })
+    .filter(Boolean) as ConversionResolution[];
+
+  return resolutions.sort((left, right) => {
+    if (left.detection.score === right.detection.score) {
+      return left.module.label.localeCompare(right.module.label);
+    }
+    return right.detection.score - left.detection.score;
+  });
+}
+
 export function resolveConversion(
   raw: string,
   available: ConversionModule[] = modules,
   options: ResolverOptions = {},
 ): ConversionResolution | null {
-  const trimmed = raw.trim();
-  if (trimmed.length === 0) return null;
-
-  let best: ConversionResolution | null = null;
-
-  available.forEach((module) => {
-    const detection = module.detect(trimmed);
-    if (!detection) return;
-
-    const biasBoost = options.biasModuleId === module.id ? 0.1 : 0;
-    const effectiveScore = detection.score + biasBoost;
-
-    const payload = module.convert(detection, trimmed);
-    if (!payload) return;
-
-    const resolution: ConversionResolution = {
-      module,
-      detection: { ...detection, score: effectiveScore },
-      payload,
-    };
-
-    if (!best || resolution.detection.score > best.detection.score) {
-      best = resolution;
-    }
-  });
-
-  return best;
+  const [best] = resolveConversions(raw, available, options);
+  return best ?? null;
 }

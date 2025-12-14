@@ -1,5 +1,5 @@
 import { describe, expect, it } from "bun:test";
-import { modules, resolveConversion } from "../index";
+import { modules, resolveConversion, resolveConversions } from "../index";
 
 describe("resolver", () => {
   it("picks color for rgb input", () => {
@@ -15,6 +15,9 @@ describe("resolver", () => {
 
     expect(temperature?.detect("100f")).not.toBeNull();
     expect(color?.detect("100f")).not.toBeNull();
+
+    const results = resolveConversions("100f", modules);
+    expect(results.map((r) => r.module.id)).toEqual(["temperature", "color"]);
 
     const result = resolveConversion("100f", modules);
     expect(result?.module.id).toBe("temperature");

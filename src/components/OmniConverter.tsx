@@ -8,6 +8,7 @@ import {
   modules,
   resolveAlwaysPossible,
   resolveConversion,
+  resolveConversions,
 } from "../conversions";
 import type { OutputRow } from "../conversions/types";
 import { cn } from "../lib/utils";
@@ -63,10 +64,13 @@ export default function OmniConverter({
 
   const trimmedInput = useMemo(() => input.trim(), [input]);
 
-  const resolution = useMemo(
-    () => resolveConversion(input, modules, { biasModuleId }),
+  const resolutions = useMemo(
+    () => resolveConversions(input, modules, { biasModuleId }),
     [input, biasModuleId],
   );
+
+  // Backwards compatibility with existing UX assumptions (e.g. helper text).
+  const resolution = resolutions[0] ?? resolveConversion(input, modules, { biasModuleId });
 
   const alwaysPreferredId = preferredAlwaysModuleId ?? biasModuleId;
 
@@ -78,17 +82,23 @@ export default function OmniConverter({
     [input, alwaysPreferredId],
   );
 
-  const hasHighlight = Boolean(resolution?.payload.highlight);
-
   const helperText = useMemo(() => {
     if (trimmedInput.length === 0) {
       return "Paste a supported value to get started.";
     }
 
-    return resolution
-      ? `Detected ${resolution.module.label}. See conversions below.`
-      : "That input is not recognized yet. You can suggest the expected result.";
-  }, [resolution, trimmedInput]);
+    if (!resolution) {
+      return "That input is not recognized yet. You can suggest the expected result.";
+    }
+
+    const extra = resolutions
+      .slice(1)
+      .map((r) => r.module.label)
+      .join(", ");
+    return extra.length > 0
+      ? `Detected ${resolution.module.label} (also: ${extra}). See conversions below.`
+      : `Detected ${resolution.module.label}. See conversions below.`;
+  }, [resolution, resolutions, trimmedInput]);
 
   return (
     <div className="space-y-8">
@@ -126,35 +136,68 @@ export default function OmniConverter({
           <h2 className="text-sm font-semibold uppercase tracking-wider text-slate-500">
             Results
           </h2>
-          {resolution ? (
-            <span className="rounded-full bg-slate-200 px-2 py-1 text-xs font-semibold text-slate-700">
-              {resolution.module.label}
-            </span>
+          {resolutions.length > 0 ? (
+            <div className="flex flex-wrap items-center gap-2">
+              {resolutions.map((r) => (
+                <span
+                  key={r.module.id}
+                  className={cn(
+                    "rounded-full px-2 py-1 text-xs font-semibold",
+                    r.module.id === resolutions[0]?.module.id
+                      ? "bg-slate-200 text-slate-700"
+                      : "bg-slate-100 text-slate-600",
+                  )}
+                >
+                  {r.module.label}
+                </span>
+              ))}
+            </div>
           ) : null}
         </div>
-        {resolution ? (
+        {resolutions.length > 0 ? (
           <div className="space-y-4">
-            {hasHighlight && resolution.payload.rows.length === 0 ? (
-              <div className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
-                {resolution.payload.highlight}
-              </div>
-            ) : (
-              <div
-                className={cn(
-                  "grid gap-4 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm",
-                  hasHighlight && "sm:grid-cols-[auto_1fr]",
-                )}
-              >
-                {hasHighlight ? (
-                  <div className="flex items-start justify-center sm:justify-start">
-                    {resolution.payload.highlight}
+            {resolutions.map((r) => {
+              const hasHighlight = Boolean(r.payload.highlight);
+              const highlightOnly = hasHighlight && r.payload.rows.length === 0;
+
+              return (
+                <div key={r.module.id} className="space-y-3">
+                  <div className="flex items-center gap-2">
+                    <span className="rounded-full bg-slate-100 px-2 py-1 text-xs font-semibold text-slate-700">
+                      {r.module.label}
+                    </span>
+                    {r.module.id === resolutions[0]?.module.id ? (
+                      <span className="text-xs text-slate-500">Top match</span>
+                    ) : (
+                      <span className="text-xs text-slate-500">Also matches</span>
+                    )}
                   </div>
-                ) : null}
-                <div className="space-y-6">
-                  <ResultRows rows={resolution.payload.rows} />
+
+                  {highlightOnly ? (
+                    <div className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
+                      {r.payload.highlight}
+                    </div>
+                  ) : (
+                    <div
+                      className={cn(
+                        "grid gap-4 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm",
+                        hasHighlight && "sm:grid-cols-[auto_1fr]",
+                      )}
+                    >
+                      {hasHighlight ? (
+                        <div className="flex items-start justify-center sm:justify-start">
+                          {r.payload.highlight}
+                        </div>
+                      ) : null}
+                      <div className="space-y-6">
+                        <ResultRows rows={r.payload.rows} />
+                      </div>
+                    </div>
+                  )}
                 </div>
-              </div>
-            )}
+              );
+            })}
+
             <SuggestionForm
               input={input}
               variant="inline"
