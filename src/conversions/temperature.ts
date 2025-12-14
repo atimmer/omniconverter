@@ -26,7 +26,8 @@ const normalizeUnit = (unit: string) =>
 const C_TO_K_OFFSET = 273.15;
 
 const detect = (raw: string): Detection | null => {
-  const match = normalizeSpacing(raw).trim().match(TEMPERATURE_REGEX);
+  const normalizedRaw = normalizeSpacing(raw).trim();
+  const match = normalizedRaw.match(TEMPERATURE_REGEX);
   if (!match?.groups) return null;
 
   const value = parseFloat(match.groups.value);
@@ -47,7 +48,8 @@ const detect = (raw: string): Detection | null => {
   }
 
   return {
-    score: 0.82,
+    // "100f" is ambiguous (can be hex #100F or 100°F). Prefer temperature.
+    score: normalizedRaw.toLowerCase() === "100f" ? 0.98 : 0.82,
     normalizedInput: { kelvin } satisfies NormalizedTemperature,
   };
 };

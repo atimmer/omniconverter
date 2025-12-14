@@ -7,6 +7,19 @@ describe("resolver", () => {
     expect(result?.module.id).toBe("color");
   });
 
+  it('detects "100f" as both temperature and color (prefers temperature)', () => {
+    const temperature = modules.find((module) => module.id === "temperature");
+    const color = modules.find((module) => module.id === "color");
+    expect(temperature).toBeTruthy();
+    expect(color).toBeTruthy();
+
+    expect(temperature?.detect("100f")).not.toBeNull();
+    expect(color?.detect("100f")).not.toBeNull();
+
+    const result = resolveConversion("100f", modules);
+    expect(result?.module.id).toBe("temperature");
+  });
+
   it("biases toward configured module when scores tie", () => {
     const result = resolveConversion("70 kg", modules, {
       biasModuleId: "mass",
