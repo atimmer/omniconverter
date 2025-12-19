@@ -4,6 +4,7 @@ A small Next.js (App Router) tool that auto-detects inputs and converts them inl
 
 - CSS colors (hex, rgb/rgba, hsl/hsla, named keywords) → RGB, RGBA, Hex with a live swatch.
 - Mass (kg ↔ lb).
+- Length (feet ↔ meters, centimeters, inches, yards, miles).
 - Speed (km/h ↔ m/s ↔ mph).
 - Power (watts ↔ kilowatts ↔ horsepower ↔ megawatts).
 - Data size (bytes, KB, MB, GB, TB).

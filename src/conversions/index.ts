@@ -4,6 +4,7 @@ import currency from "./currency";
 import dataSize from "./dataSize";
 import force from "./force";
 import jwt from "./jwt";
+import length from "./length";
 import mass from "./mass";
 import moment from "./moment";
 import power from "./power";
@@ -29,6 +30,7 @@ export const modules: ConversionModule[] = [
   dataSize,
   force,
   jwt,
+  length,
   mass,
   moment,
   power,
