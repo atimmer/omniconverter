@@ -6,6 +6,8 @@ A small Next.js (App Router) tool that auto-detects inputs and converts them inl
 - Mass (kg ↔ lb).
 - Length (feet ↔ meters, centimeters, inches, yards, miles).
 - Speed (km/h ↔ m/s ↔ mph).
+- Time durations (seconds ↔ minutes ↔ hours ↔ days ↔ weeks ↔ months).
+- Clock time (12-hour am/pm ↔ 24-hour HH:mm).
 - Power (watts ↔ kilowatts ↔ horsepower ↔ megawatts).
 - Data size (bytes, KB, MB, GB, TB).
 - JWT decode (header + payload + signature, decode only).
